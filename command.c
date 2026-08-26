@@ -147,7 +147,17 @@ void handleInput(TaskList *list, char *input, size_t input_size, char *err, size
 }
 
 void saveTasks(TaskList *list) {
-    FILE *task_file = fopen(TASK_FILE, "w");
+    char taskfile[512];
+    const char *home = getenv("HOME");
+    if (home == NULL) {
+        fprintf(stderr, "Could not determine home directory\n");
+        strcpy(taskfile, "tasks.txt"); // Fallback: use relative path
+    }
+    else {
+        snprintf(taskfile, sizeof(taskfile), "%s/.todo_tasks", home);
+    }
+
+    FILE *task_file = fopen(taskfile, "w");
     if (task_file == NULL) {
         fprintf(stderr, "Failed to create or open tasks.txt\n");
         return;
@@ -182,7 +192,17 @@ void saveTasks(TaskList *list) {
 }
 
 void readTasks(TaskList *list) {
-    FILE *task_file = fopen(TASK_FILE, "r");
+    char taskfile[512];
+    const char *home = getenv("HOME");
+    if (home == NULL) {
+        fprintf(stderr, "Could not determine home directory\n");
+        strcpy(taskfile, "tasks.txt"); // Fallback: use relative path
+    }
+    else {
+        snprintf(taskfile, sizeof(taskfile), "%s/.todo_tasks", home);
+    }
+
+    FILE *task_file = fopen(taskfile, "r");
     if (task_file == NULL) {
         fprintf(stderr, "Failed to open tasks.txt\n");
         return;

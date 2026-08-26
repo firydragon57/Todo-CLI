@@ -2,11 +2,10 @@
 #define COMMAND_H
 
 #include <time.h>
+#include <string.h>
 
 #include "tasklist.h"
 #include "task.h"
-
-#define TASK_FILE "./tasks.txt"
 
 typedef struct AddTaskFlags {
     char name[128];
