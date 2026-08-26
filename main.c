@@ -11,6 +11,7 @@ int main() {
     char err[256] = {0};
 
     readTasks(list);
+    sortTasks(list);
     initNextTaskId(list);
 
     while (1) {

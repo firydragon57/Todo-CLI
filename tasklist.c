@@ -130,6 +130,20 @@ void printTasks(TaskList *list, int spacing) {
     printf("\n");
 }
 
+static int compareByDueDate(const void *a, const void *b) {
+    Task *taskA = *(Task **)a;
+    Task *taskB = *(Task **)b;
+
+    if (taskA->due_date < taskB->due_date) return -1;
+    if (taskA->due_date > taskB->due_date) return 1;
+    return 0;
+}
+
+// Sort list by duedate
+void sortTasks(TaskList *list) {
+    qsort(list->tasks, list->size, sizeof(Task *), compareByDueDate);
+}
+
 // Removes task from the list at a given position
 int removeTask(TaskList *list, int task_id) {
     if (list == NULL) {

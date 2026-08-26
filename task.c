@@ -96,6 +96,7 @@ time_t parseDate(char *date) {
     datetime.tm_hour = 23;
     datetime.tm_min = 59;
     datetime.tm_sec = 59;
+    datetime.tm_isdst = -1;
 
     return mktime(&datetime);
 }

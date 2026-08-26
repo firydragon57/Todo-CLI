@@ -35,6 +35,9 @@ int removeTask(TaskList *list, int task_id);
 // Prints out all the tasks
 void printTasks(TaskList *list, int spacing);
 
+// Sort list by duedate
+void sortTasks(TaskList *list);
+
 // Deletes a task list
 void deleteList(TaskList *list);
 

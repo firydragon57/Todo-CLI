@@ -112,6 +112,7 @@ void handleInput(TaskList *list, char *input, size_t input_size, char *err, size
             snprintf(err, err_size, "add: invalid arguments -- failed to add task\n");
             return;
         }
+        sortTasks(list);
     }
     else if (strncmp(input, "mark", 4) == 0) {
         char *flags = strchr(input, ' ');
