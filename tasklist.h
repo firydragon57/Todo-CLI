@@ -14,10 +14,11 @@ typedef struct TaskList {
     Task **tasks;
 } TaskList;
 
-static int next_task_id = 0;
-
 // Generates a task id
 int generateTaskId();
+
+// Initializes the next task id
+void initNextTaskId(TaskList *list);
 
 // Creates a task list
 TaskList *createList();

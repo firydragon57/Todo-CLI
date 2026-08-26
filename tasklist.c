@@ -1,7 +1,19 @@
 #include "tasklist.h"
 
+static int next_task_id = 0;
+
 int generateTaskId() {
     return next_task_id++;
+}
+
+void initNextTaskId(TaskList *list) {
+    int maxId = -1;
+    for (int i = 0; i < list->size; i++) {
+        if (list->tasks[i]->task_id > maxId) {
+            maxId = list->tasks[i]->task_id;
+        }
+    }
+    next_task_id = maxId + 1;
 }
 
 // Creates a task list

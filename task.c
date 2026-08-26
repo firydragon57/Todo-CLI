@@ -63,6 +63,8 @@ Task *parseTask(char *task_str) {
         free(task_copy);
         return NULL;
     }
+
+    free(task_copy);
     return task;
 }
 
