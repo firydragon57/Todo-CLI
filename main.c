@@ -5,7 +5,7 @@
 #include "tasklist.h"
 #include "command.h"
 
-int main() {
+int main(void) {
     TaskList *list = createList();
     char input[256] = {0};
     char err[256] = {0};

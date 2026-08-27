@@ -60,7 +60,11 @@ MarkTaskFlags parseFlagsMark(char *flag_str) {
 }
 
 void printTaskList(TaskList *list, char *err) {
-    system("clear");
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
 
     if (strlen(err) != 0) {
         printf("%s\n", err);
@@ -84,7 +88,8 @@ void handleInput(TaskList *list, char *input, size_t input_size, char *err, size
         snprintf(err, err_size, "Failed to read input\n");
         exit(1);
     }
-    input[strcspn(input, "\n")] = '\0';
+
+    input[strcspn(input, "\r\n")] = '\0';
 
     if (strcmp(input, "exit") == 0) {
         saveTasks(list);
@@ -148,7 +153,13 @@ void handleInput(TaskList *list, char *input, size_t input_size, char *err, size
 
 void saveTasks(TaskList *list) {
     char taskfile[512];
-    const char *home = getenv("HOME");
+
+    #ifdef _WIN32
+        const char *home = getenv("USERPROFILE");
+    #else
+        const char *home = getenv("HOME");
+    #endif
+
     if (home == NULL) {
         fprintf(stderr, "Could not determine home directory\n");
         strcpy(taskfile, "tasks.txt"); // Fallback: use relative path
@@ -193,7 +204,13 @@ void saveTasks(TaskList *list) {
 
 void readTasks(TaskList *list) {
     char taskfile[512];
-    const char *home = getenv("HOME");
+
+    #ifdef _WIN32
+        const char *home = getenv("USERPROFILE");
+    #else
+        const char *home = getenv("HOME");
+    #endif
+
     if (home == NULL) {
         fprintf(stderr, "Could not determine home directory\n");
         strcpy(taskfile, "tasks.txt"); // Fallback: use relative path

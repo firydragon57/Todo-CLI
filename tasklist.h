@@ -15,13 +15,13 @@ typedef struct TaskList {
 } TaskList;
 
 // Generates a task id
-int generateTaskId();
+int generateTaskId(void);
 
 // Initializes the next task id
 void initNextTaskId(TaskList *list);
 
 // Creates a task list
-TaskList *createList();
+TaskList *createList(void);
 
 // Adds task to the end of the list
 int addTask(TaskList *list, char *name, time_t due_date);

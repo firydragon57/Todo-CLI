@@ -2,7 +2,7 @@
 
 static int next_task_id = 0;
 
-int generateTaskId() {
+int generateTaskId(void) {
     return next_task_id++;
 }
 
@@ -17,7 +17,7 @@ void initNextTaskId(TaskList *list) {
 }
 
 // Creates a task list
-TaskList *createList() {
+TaskList *createList(void) {
     TaskList *list = (TaskList *) malloc(sizeof(TaskList));
     if (list == NULL) {
         return NULL;
