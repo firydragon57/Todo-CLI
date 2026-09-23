@@ -26,7 +26,7 @@ time_t parseDate(char *date);
 int computeDueAt(Task *task, char *output, size_t output_size);
 
 // Prints out task details
-int printTask(Task *task, char *output, size_t output_size, int spacing, int right_table_spacing);
+int printTask(Task *task, char *output, size_t output_size, int spacing, int right_table_spacing, int id_width);
 
 // Deletes a task
 void deleteTask(Task *task);

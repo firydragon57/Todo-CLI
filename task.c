@@ -126,14 +126,14 @@ int computeDueAt(Task *task, char *output, size_t output_size) {
 }
 
 // Prints out task details
-int printTask(Task *task, char *output, size_t output_size, int spacing, int right_table_spacing) {
+int printTask(Task *task, char *output, size_t output_size, int spacing, int right_table_spacing, int id_width) {
     char dueDate[64];
     char dueAt[64];
 
     strftime(dueDate, sizeof(dueDate), "%m-%d-%Y", localtime(&task->due_date));
     computeDueAt(task, dueAt, sizeof(dueAt));
 
-    return snprintf(output, output_size, "| %d: %-*s | Due: %s | Due in: %-*s |", task->task_id, spacing, task->name, dueDate, right_table_spacing, dueAt);
+    return snprintf(output, output_size, "| %*d | %-*s | Due: %s | Due in: %-*s |", id_width, task->task_id, spacing, task->name, dueDate, right_table_spacing, dueAt);
 }
 
 // Deletes a task

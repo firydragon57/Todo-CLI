@@ -105,6 +105,7 @@ void printTasks(TaskList *list, int spacing) {
 
     int divLength = 0;
     int rightTableSpacing = 0;
+    int idWidth = 0;
     char output[256];
 
     // Find the divider length
@@ -114,7 +115,12 @@ void printTasks(TaskList *list, int spacing) {
             rightTableSpacing = dueAtLen;
         }
 
-        int bytes_outputted = printTask(list->tasks[i], NULL, 0, spacing, rightTableSpacing);
+        int idLen = snprintf(NULL, 0, "%d", list->tasks[i]->task_id);
+        if (idLen > idWidth) {
+            idWidth = idLen;
+        }
+
+        int bytes_outputted = printTask(list->tasks[i], NULL, 0, spacing, rightTableSpacing, idWidth);
         if (bytes_outputted > divLength) {
             divLength = bytes_outputted;
         }
@@ -123,7 +129,7 @@ void printTasks(TaskList *list, int spacing) {
     printf("Your To-Do List:\n\n");
     printDivider(divLength);
     for (int i = 0; i < list->size; i++) {
-        printTask(list->tasks[i], output, sizeof(output), spacing, rightTableSpacing);
+        printTask(list->tasks[i], output, sizeof(output), spacing, rightTableSpacing, idWidth);
         printf("%s\n", output);
     }
     printDivider(divLength);
